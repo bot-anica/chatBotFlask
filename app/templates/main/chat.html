@@ -1,0 +1,47 @@
+{% macro get_message_emotion_icon(emotion) %}
+  {% if emotion == 'positive' %}
+    😊
+  {% elif emotion == 'negative' %}
+    😔
+  {% endif %}
+{% endmacro %}
+
+{% extends "base.html" %}
+
+{% block content %}
+  <div class="mx-auto">
+    <h1 class="text-lg font-semibold mb-6 text-gray text-center">Chat</h1>
+    <h2 class="text-xl font-semibold mb-6">{{ chat.title }}</h2>
+
+    <div id="chat-messages" class="flex flex-col gap-8 p-4 border border-gray-light rounded-md h-[calc(100vh-360px)] overflow-y-scroll mb-6">
+      {% for message in chat.messages %}
+        {% set is_last = loop.last %}
+        {% if message.author == "user" %}
+          {% include "_chat_user_message.html" %}
+        {% else %}
+          {% include "_chat_bot_message.html" %}
+        {% endif %}
+      {% endfor %}
+    </div>
+
+    <form action="" method="post" novalidate>
+      {{ form.hidden_tag() }}
+      <div class="flex flex-col justify-center items-center">
+        {{ form.text(cols=80, rows=1,class="w-96 px-4 py-2 rounded-md border border-gray-light text-gray-dark text-m resize-none placeholder-gray") }}
+        <div class="h-5">
+          <span class="text-sm text-red">{{ "* {}".format(form.text.errors[0]) if form.text.errors[0] else '' }}</span>
+        </div>
+      </div>
+      <div class="flex justify-center">
+        {{ form.submit(class="min-w-40 bg-blue-light text-blue-dark rounded-md px-4 py-1 text-m") }}
+      </div>
+    </form>
+  </div>
+{% endblock %}
+
+{% block scripts %}
+  <script>
+    const objDiv = document.getElementById("chat-messages");
+    objDiv.scrollTop = objDiv.scrollHeight;
+  </script>
+{% endblock %}

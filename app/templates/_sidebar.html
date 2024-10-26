@@ -1,0 +1,18 @@
+<div class="w-64 bg-gray-100 p-4 h-[calc(100vh-60px)] overflow-y-scroll scrollbar-hidden border-r border-gray-light bg-gray-lightest">
+  <div class="flex items-center justify-between mb-4">
+    <h2 class="text-lg font-semibold">All Chats</h2>
+    <a href="{{ url_for('main.index') }}" class="block text-gray-dark bg-gray-light text-sm rounded-md px-4 py-1 hover:bg-blue-light">+ Add Chat</a>
+  </div>
+  {% if all_chats|length == 0 %}
+    <p class="text-gray text-center">No Chats</p>
+  {% endif %}
+  <ul>
+    {% for chat in all_chats %}
+      <li class="mb-2 text-sm bg-white rounded-md px-2 border border-gray-light hover:bg-blue-light">
+        <a href="{{ url_for('main.chat', chat_id=chat.id) }}" class="overflow-hidden whitespace-nowrap text-ellipsis block py-2 text-gray-700 hover:text-blue-dark">
+          {{ chat.title }}
+        </a>
+      </li>
+    {% endfor %}
+  </ul>
+</div>

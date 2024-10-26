@@ -1,0 +1,32 @@
+<html>
+  <head>
+    {% if title %}
+    <title>{{ title }} - ChatBot</title>
+    {% else %}
+    <title>Welcome to ChatBot!</title>
+    {% endif %}
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="{{ url_for('static', filename='js/tailwind_config.js') }}"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+  </head>
+  <body>
+    {% include "_header.html" %}
+    {% include "_flashed_messages.html" %}
+
+    <div class="flex">
+      <!-- Sidebar showing all chats -->
+      {% if current_user.is_authenticated %}
+        {% include "_sidebar.html" %}
+      {% endif %}
+
+      <!-- Main content area -->
+      <div class="flex-1 p-4">
+        {% block content %}{% endblock %}
+      </div>
+    </div>
+
+    {{ moment.include_moment() }}
+  </body>
+</html>
+
+{% block scripts %}{% endblock %}

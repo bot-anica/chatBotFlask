@@ -1,0 +1,7 @@
+<div class="bg-gray-light text-gray-dark rounded-md px-4 py-2 text-m self-start mr-20 {% if is_last %}animate-[fadeSlideIn_0.5s_ease-out_forwards]{% endif %}">
+  <div class="flex gap-2 pb-1 mb-2 border-b border-gray-lightest">
+    <p class="mb-1 text-xs text-black">{{ message.author.upper() }}</p>
+    <p class="mb-1 text-xs text-gray">{{ moment(message.timestamp).fromNow() }}</p>
+  </div>
+  <p>{{ message.text|markdown_filter|safe }}</p>
+</div>

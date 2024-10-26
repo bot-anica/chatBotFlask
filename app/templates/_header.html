@@ -1,0 +1,27 @@
+{% macro get_link_style(endpoint) %}
+  {{ request.endpoint == endpoint and 'text-blue' or 'text-gray-dark' }}
+{% endmacro %}
+
+<header class="px-8 py-4 shadow-md">
+  <div class="mx-auto max-w-7xl">
+    <nav>
+      <ul class="flex items-center gap-6">
+        <li class="mr-14">
+          <a class="text-xl font-semibold" href="{{ url_for('main.index') }}">ChatBot</a>
+        </li>
+        {% if current_user.is_anonymous %}
+          <li class="ml-auto">
+            <a class="{{ get_link_style('login') }}" href="{{ url_for('auth.login') }}">Login</a>
+          </li>
+          <li>
+            <a class="{{ get_link_style('register') }}" href="{{ url_for('auth.register') }}">Register</a>
+          </li>
+        {% else %}
+          <li class="ml-auto">
+            <a class="{{ get_link_style('logout') }}" href="{{ url_for('auth.logout') }}">Logout</a>
+          </li>
+        {% endif %}
+      </ul>
+    </nav>
+  </div>
+</header>

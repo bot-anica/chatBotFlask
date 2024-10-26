@@ -1,0 +1,10 @@
+<div class="bg-blue-light text-blue-dark rounded-md px-4 py-2 text-m self-end ml-20 {% if is_last %}animate-[fadeSlideIn_0.5s_ease-out_forwards]{% endif %} text-right">
+  <div class="flex justify-end gap-2 pb-1 mb-2 border-b border-blue-dark">
+    <p class="mb-1 text-xs text-gray">{{ moment(message.timestamp).fromNow() }}</p>
+    <p class="text-right mb-1 text-xs text-black">{{ message.author.upper() }}</p>
+  </div>
+  <p>{{message.text|markdown_filter|safe}}</p>
+  {% if message.emotion %}
+    <p class="text-right mb-1 text-xs text-gray">({{ message.emotion }}){{ get_message_emotion_icon(message.emotion) }}</p>
+  {% endif %}
+</div>
