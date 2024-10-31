@@ -32,4 +32,3 @@ def markdown_filter(text):
 
 
 from app import models
-from app.main import routes
