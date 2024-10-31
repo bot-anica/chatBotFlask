@@ -5,7 +5,7 @@
     <h1 class="text-center text-xl font-semibold mb-6 text-gray">Hi, {{ current_user.username }}!</h1>
     <form action="" method="post" novalidate>
       {{ form.hidden_tag() }}
-      <div class="h-[calc(100vh-160px)] flex flex-col justify-center items-center">
+      <div class="h-[calc(100vh-161px)] flex flex-col justify-center items-center">
         {{ form.question.label(class="text-m font-semibold") }}<br>
         {{ form.question(cols=80, rows=1,class="w-96 px-4 py-2 rounded-md border border-gray-light text-gray-dark text-m resize-none placeholder-gray") }}<br>
         <div class="flex justify-center">
